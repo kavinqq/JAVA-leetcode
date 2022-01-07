@@ -57,17 +57,17 @@ class IPChecker{
         return checkPass;
     }//end of ipv4()
     
+    /*搞了好幾小時 終於correct 特別要注意幾種狀況 
+      1. 有:: 則 octet 不能 >= 8  
+      2. 沒有:: 則 octet 要 = 8
+      3. 結尾不能是 :
+    */
     boolean ipv6(String ip){
         boolean checkPass = true;
         int octet = 0, //有幾個octet
             doubleColon = 0,//用雙冒號(縮寫連續0)的次數 最多1
             octetLen = 0; //每個Octet內的長度
         for(int i = 0; i < ip.length(); ){
-            //如果這次第9個octet 錯誤
-            if(octet >= 8){
-                checkPass = false;
-                break;
-            }
             //處理 開頭雙冒號
             if(i == 0 && ip.charAt(i) == ':' && ip.charAt(i + 1) == ':'){
                 octet += 1; // 遇到雙冒號 至少縮寫一節
@@ -113,6 +113,7 @@ class IPChecker{
             }
             // 一切合格跑完IP字串長度 且以 0~9/A~F/a~f 結尾
             else if(i == ip.length()){
+                octet += 1;
                 break;
             }
             // 一切合格跑完一個Octet且ip.charAt(i)為 ;
@@ -122,6 +123,10 @@ class IPChecker{
                 i++;
             }
         }//end of for in line.55
+        if(doubleColon == 0 && octet != 8)
+            checkPass = false;
+        else if(doubleColon == 1 && octet >= 8)
+            checkPass = false;
         return checkPass;
     }//end of ipv6()
 }//end of class IPChecker
