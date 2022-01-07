@@ -41,25 +41,22 @@ public class Main{
         }
         //由大到小
         else{
+        /*  思考盲點: 
+            以 number 01/02/03/04/05/06  OrderBy Desc為例
+               grade  10/10/10/30/40/02
+               
+            之前思考太僵化，一直把sort當成前提，想說sort後number為 06/01/02/03/04/05 (ASC)
+            若reverse後要在另外迴圈處理相同成績時 把號碼小的先印。
+            但是如果(只寫number表示)
+            先reverse →    06/05/04/03/02/01  穩定排序 相同大小 順序不變
+            再sort    →    06/03/02/01/04/05 
+            再reverse →    05/04/01/02/03/06  即可拿到答案!!
+        */
+            Collections.reverse(stu);
             Collections.sort(stu);
             Collections.reverse(stu);
-            //處理相同成績的狀況→把號碼由小到大print
-            for(int i = 0; i < stu.size(); ){
-                //tmp_i 為 相同成績的最後一個index , move為此輪for i移動格數
-                int move = 1, tmp_i = i+1;
-                while(tmp_i != stu.size() && stu.get(i).grade == stu.get(tmp_i).grade){
-                    tmp_i++;
-                    move++;
-                }//end while
-                //tmp_i 減去最後的為false的++
-                tmp_i -= 1;
-                //print到當前i
-                while(tmp_i >= i){
-                    System.out.println(stu.get(tmp_i));
-                    tmp_i--;
-                }
-                i += move;
-            }//end for
+            for(Student s: stu)
+                System.out.println(s);
         }//end else
     }
 }
