@@ -52,3 +52,28 @@ class Solution {
         return ansLen;
     }//end lengthOfLongestSubstring()
 }// end class Solution
+
+
+/*  深複製 clone
+    public static <T extends Serializable> T clone(T obj) {
+            T cloneObj = null;
+            try {
+                // 寫入位元組流
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ObjectOutputStream obs = new ObjectOutputStream(out);
+                obs.writeObject(obj);
+                obs.close();
+
+                // 分配記憶體，寫入原始物件，生成新物件
+                ByteArrayInputStream ios = new ByteArrayInputStream(out.toByteArray());
+                ObjectInputStream ois = new ObjectInputStream(ios);
+                // 返回生成的新物件
+                cloneObj = (T) ois.readObject();
+                ois.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return cloneObj;
+        }
+
+*/
