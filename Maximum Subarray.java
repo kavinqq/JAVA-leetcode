@@ -29,9 +29,11 @@ class Solution {
                    max = (max > tmpMax)? max : tmpMax;
                }               
                else if(nums[tmp_i] <= 0){
-                   if(tmpMax + nums[tmp_i]< 0){
+                   //如果加了之後 累加 <= 0 那表示 i 這個數之前的數 為此子字串最大值 跳出
+                   if(tmpMax + nums[tmp_i] <= 0){
                        break;
                    }
+                   //如果加了之後 累加<=0 那表示可以再往後找找看
                    else{
                        tmpMax += nums[tmp_i ++];                       
                    }                       
