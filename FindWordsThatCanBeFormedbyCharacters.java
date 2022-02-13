@@ -1,4 +1,6 @@
 /*
+(Sorry! If you think my sentences are wired that is normal.Because I'm practiceing English now.)
+
 line 11
 findFrom <= chars.length()
 I stuck for a while because I coded my while condition "findFrom < chars.length()"
